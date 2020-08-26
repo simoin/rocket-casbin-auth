@@ -1,0 +1,4 @@
+p, bob, /pen, GET
+p, admin, /book/1, GET
+
+g, alice, admin
