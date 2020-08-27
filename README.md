@@ -1,5 +1,7 @@
 # Rocket Casbin Middleware
-Casbin intergration for actix framework
+
+[![Crates.io](https://meritbadge.herokuapp.com/rocket-casbin-auth)](https://crates.io/crates/rocket-casbin-auth)
+[![Docs](https://docs.rs/rocket-casbin-auth/badge.svg)](https://docs.rs/rocket-casbin-auth)
 
 ## Usage
 
@@ -9,11 +11,9 @@ rocket_casbin_auth = "0.1.0"
 
 ## Guide
 
-with the Rocket [Fairing Guide](https://rocket.rs/v0.4/guide/fairings/), we need to use [Fairing](https://api.rocket.rs/v0.4/rocket/fairing/trait.Fairing.html) trait for authentication or authorization with casbin. 
+According to Rocket [Fairing Guide](https://rocket.rs/v0.4/guide/fairings/), we need to use [Fairing](https://api.rocket.rs/v0.4/rocket/fairing/trait.Fairing.html) trait for authentication or authorization with casbin. 
 
-So you need to implement `CasbinMiddleware` and `Fairing`.
- 
-example:
+So you need to implement `CasbinMiddleware` and `Fairing` first.
 ```rust
 pub struct CasbinFairing {
     enforcer: Arc<RwLock<CachedEnforcer>>,
@@ -58,5 +58,21 @@ impl Fairing for CasbinFairing {
     fn on_request(&self, req: &mut Request<'r>, _: &Data) {
         self.enforce(req);
     }
+}
+```
+
+and then, attach fairing to rocket.
+
+```rust
+rocket::ignite()
+    .attach(CasbinFairing::new("examples/model.conf", "examples/role_policy.csv"))
+```
+
+finish, add guard to your route
+
+```rust
+#[get("/book/1")]
+pub fn book(_g: CasbinGuard) -> &'static str {
+    "book"
 }
 ```
