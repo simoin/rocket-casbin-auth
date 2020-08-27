@@ -6,7 +6,7 @@
 ## Usage
 
 ```rust
-rocket_casbin_auth = "0.1.0"
+rocket_casbin_auth = "0.1.1"
 ```
 
 ## Guide

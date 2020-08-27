@@ -30,7 +30,7 @@ impl CasbinFairing {
 }
 
 impl CasbinMiddleware for CasbinFairing {
-    fn get_casbin_vals<'a>(&self, req: &Request<'_>) -> Vec<String> {
+    fn casbin_vals<'a>(&self, req: &Request<'_>) -> Vec<String> {
         let path = req.uri().path().to_owned();
         let sub = match req.cookies().get("name") {
             Some(cookie) => cookie.value().to_owned(),
@@ -40,7 +40,7 @@ impl CasbinMiddleware for CasbinFairing {
         vec![sub, path, method]
     }
 
-    fn get_cached_enforcer(&self) -> Arc<RwLock<CachedEnforcer>> {
+    fn cached_enforcer(&self) -> Arc<RwLock<CachedEnforcer>> {
         self.enforcer.clone()
     }
 }

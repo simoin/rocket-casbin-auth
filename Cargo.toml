@@ -1,11 +1,14 @@
 [package]
 name = "rocket_casbin_auth"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["simoin"]
 edition = "2018"
 license = "Apache-2.0"
 description = "Casbin Rocket access control middleware"
+documentation = "https://docs.rs/rocket-casbin-auth"
 homepage= "https://github.com/simoin/rocket-casbin-auth"
+readme = "README.md"
+keywords = ["middleware", "rocket", "casbin", "authorization"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
