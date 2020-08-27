@@ -68,7 +68,7 @@ rocket::ignite()
     .attach(CasbinFairing::new("examples/model.conf", "examples/role_policy.csv"))
 ```
 
-finish, add guard to your route
+finally, add guard to your route
 
 ```rust
 #[get("/book/1")]
